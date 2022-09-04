@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/YucenLyc/newReleasify/issues"
   },
-  "homepage": "https://github.com/YucenLyc/newReleasify#readme"
+  "homepage": "https://github.com/YucenLyc/newReleasify#readme",
+  "dependencies": {
+    "express": "^4.18.1"
+  }
 }
