@@ -18,7 +18,7 @@ app.get('/', (req, res) => {
  * @param  {number} length The length of the string
  * @return {string} The generated string
  */
- const generateRandomString = length => {
+const generateRandomString = length => {
   let text = '';
   const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
   for (let i = 0; i < length; i++) {
@@ -35,11 +35,11 @@ app.get('/login', (req, res) => {
   res.cookie(stateKey, state);
 
   //these 2 scopes will allow access to the logged in account:
-  const scope ='user-read-private user-read-email';
+  const scope = 'user-read-private user-read-email';
 
   const queryParams = querystring.stringify({
     client_id: CLIENT_ID,
-    response_type: 'code', 
+    response_type: 'code',
     redirect_uri: REDIRECT_URI,
     state: state,
     scope: scope
@@ -66,15 +66,29 @@ app.get('/callback', (req, res) => {
     },
   })
   .then(response => {
-    if (response.status === 200){
-      res.send(`<pre>${JSON.stringify(response.data, null, 2)}</pre>`); //formating the return JSON
+    if (response.status === 200) {
+
+      const { access_token, token_type } = response.data;
+
+      axios.get('https://api.spotify.com/v1/me', {
+        headers: {
+          Authorization: `${token_type} ${access_token}`
+        }
+      })
+        .then(response => {
+          res.send(`<pre>${JSON.stringify(response.data, null, 2)}</pre>`);
+        })
+        .catch(error => {
+          res.send(error);
+        });
+
     } else {
-      return res.send(response);
+      res.send(response);
     }
   })
   .catch(error => {
     res.send(error);
-  })
+  });
 })
 
 const port = 9999;
