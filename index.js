@@ -33,6 +33,7 @@ app.get('/login', (req, res) => {
   //set a cookie: 
   res.cookie(stateKey, state);
 
+  //these 2 scopes will allow access to the logged in account:
   const scope ='user-read-private user-read-email';
 
   const queryParams = querystring.stringify({
@@ -43,9 +44,12 @@ app.get('/login', (req, res) => {
     scope: scope
   })
 
-
   res.redirect(`https://accounts.spotify.com/authorize?${queryParams}`);
 });
+
+app.get('/callback', (req, res) =>
+  res.send('callback')
+)
 
 const port = 9999;
 app.listen(port, () => {
