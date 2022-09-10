@@ -3,6 +3,7 @@ const { query } = require('express');
 const express = require('express');
 const app = express();
 const querystring = require('query-string');
+const axios = require('axios');
 
 const CLIENT_ID = process.env.CLIENT_ID;
 const CLIENT_SECRET = process.env.CLIENT_SECRET;
@@ -47,9 +48,34 @@ app.get('/login', (req, res) => {
   res.redirect(`https://accounts.spotify.com/authorize?${queryParams}`);
 });
 
-app.get('/callback', (req, res) =>
-  res.send('callback')
-)
+app.get('/callback', (req, res) => {
+  const code = req.query.code || null;
+
+  axios({
+    //config object 
+    method: 'post',
+    url: 'https://accounts.spotify.com/api/token',
+    data: querystring.stringify({
+      grant_type: 'authorization_code',
+      code: code,
+      redirect_uri: REDIRECT_URI
+    }),
+    headers: {
+      'content-type': 'application/x-www-form-urlencoded',
+      Authorization: `Basic ${new Buffer.from(`${CLIENT_ID}:${CLIENT_SECRET}`).toString('base64')}`,
+    },
+  })
+  .then(response => {
+    if (response.status === 200){
+      res.send(`<pre>${JSON.stringify(response.data, null, 2)}</pre>`); //formating the return JSON
+    } else {
+      return res.send(response);
+    }
+  })
+  .catch(error => {
+    res.send(error);
+  })
+})
 
 const port = 9999;
 app.listen(port, () => {
