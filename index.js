@@ -64,48 +64,48 @@ app.get('/callback', (req, res) => {
       Authorization: `Basic ${new Buffer.from(`${CLIENT_ID}:${CLIENT_SECRET}`).toString('base64')}`,
     },
   })
+  .then(response => {
+    if (response.status === 200) {
+      const { access_token, refresh_token } = response.data;
+
+      const queryParams = querystring.stringify({
+        access_token,
+        refresh_token,
+      });
+
+      res.redirect(`http://localhost:3001/?${queryParams}`);
+
+    } else {
+      res.redirect(`/?${querystring.stringify({ error: 'invalid_token' })}`);
+    }
+  })
+  .catch(error => {
+    res.send(error);
+  })
+});
+
+app.get('/refresh_token', (req, res) => {
+  const { refresh_token } = req.query;
+
+  axios({
+    method: 'post',
+    url: 'https://accounts.spotify.com/api/token',
+    data: querystring.stringify({
+      grant_type: 'refresh_token',
+      refresh_token: refresh_token
+    }),
+    headers: {
+      'content-type': 'application/x-www-form-urlencoded',
+      Authorization: `Basic ${new Buffer.from(`${CLIENT_ID}:${CLIENT_SECRET}`).toString('base64')}`,
+    },
+  })
     .then(response => {
-      if (response.status === 200) {
-        const { access_token, refresh_token } = response.data;
-
-        const queryParams = querystring.stringify({
-          access_token,
-          refresh_token,
-        });
-        //redirect to react app:
-        res.redirect(`http://localhost:9999/?${queryParams}`);
-
-      } else {
-        res.redirect(`/?${querystring.stringify({ error: 'invalid_token' })}`);
-      }
+      res.send(response.data);
     })
     .catch(error => {
       res.send(error);
     });
 });
-
-// app.get('/refresh_token', (req, res) => {
-//   const { refresh_token } = req.query;
-
-//   axios({
-//     method: 'post',
-//     url: 'https://accounts.spotify.com/api/token',
-//     data: querystring.stringify({
-//       grant_type: 'refresh_token',
-//       refresh_token: refresh_token
-//     }),
-//     headers: {
-//       'content-type': 'application/x-www-form-urlencoded',
-//       Authorization: `Basic ${new Buffer.from(`${CLIENT_ID}:${CLIENT_SECRET}`).toString('base64')}`,
-//     },
-//   })
-//     .then(response => {
-//       res.send(response.data);
-//     })
-//     .catch(error => {
-//       res.send(error);
-//     });
-// });
 
 const port = 9999;
 app.listen(port, () => {
