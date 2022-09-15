@@ -11,7 +11,16 @@ function App() {
 
     console.log("this is aceess_token:", accessToken);
     console.log("this is refresh_token:", refreshToken);
+
+    if(refreshToken) {
+      fetch(`/refresh_token?refresh_token=${refreshToken}`)
+      .then(res => res.json())
+      .then(data => console.log(data))
+      .catch(err => console.log(err))
+    }
   }, []);
+
+ 
   
   return (
     <div className="App">
