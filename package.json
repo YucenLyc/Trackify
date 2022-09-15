@@ -4,7 +4,9 @@
   "description": "An app that notify users for any release updates from musicians they follow",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
+    "server": "nodemon index.js",
+    "client": "cd client && npm start"
   },
   "repository": {
     "type": "git",
@@ -24,6 +26,7 @@
     "query-string": "^7.1.1"
   },
   "devDependencies": {
+    "concurrently": "^7.4.0",
     "nodemon": "^2.0.19"
   }
 }
