@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import { useState, useEffect } from 'react';
 import { accessToken } from './spotify';
 import './App.css';
