@@ -28,6 +28,19 @@ const hasTokenExpired = () => {
   return (millisecondsElapsed / 1000) > Number(expiredTime);
 };
 
+/**
+ * Clear out all localStorage items we've set and reload the page
+ * @returns {void}
+ */
+export const logout = () => {
+  //clear all localstorage items: 
+  for (const property in localStorage) {
+    window.localStorage.removeItem(LOCALSTORAGE_KEYS[property]);
+  }
+  //navigate back to home page: 
+  window.location = window.location.origin;
+}
+
 const refreshToken = async () => {
   try {
     //logout if there is no refresh token stored or somehow we ended up with an infinte reloading loop
