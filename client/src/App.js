@@ -8,12 +8,12 @@ function App() {
 
   useEffect(() => {
     setToken(accessToken);
-    
+
     const fetchData = async () => {
       try {
         const { data } = await getCurrentUserProfile(accessToken);
         setProfile(data);
-      } catch(event) {
+      } catch (event) {
         console.error(event);
       }
     }
@@ -29,8 +29,18 @@ function App() {
           </a>
         ) : (
           <>
-          <h1>Logged In!</h1>
-          <button onClick={logout}>Log Out</button>
+            <h1>Logged In!</h1>
+            <button onClick={logout}>Log Out</button>
+
+            {profile && (
+              <div>
+                <h1>{profile.display_name}</h1>
+                <p>{profile.followers.total}</p>
+                {profile.images.length && profile.images[0].url && (
+                  <img src={profile.images[0].url} alt="Avatar" />
+                )}
+              </div>
+            )}
           </>
         )}
       </header>
