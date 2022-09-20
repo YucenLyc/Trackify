@@ -1,3 +1,4 @@
+import axios from 'axios';
 //MAP FOR LOCAL STORAGE KEYS:
 const LOCALSTORAGE_KEYS = {
   accessToken: 'spotify_acess_token',
@@ -20,12 +21,34 @@ const LOCALSTORAGE_VALUES = {
  */
 const hasTokenExpired = () => {
   const { accessToken, timestamp, expiredTime } = LOCALSTORAGE_VALUES;
-  if ( !accessToken || !timestamp ) {
-    return false; 
+  if (!accessToken || !timestamp) {
+    return false;
   }
-  const millisecondsElapsed = Date.now() - Number(timestamp); 
+  const millisecondsElapsed = Date.now() - Number(timestamp);
   return (millisecondsElapsed / 1000) > Number(expiredTime);
-}
+};
+
+const refreshToken = async () => {
+  try {
+    //logout if there is no refresh token stored or somehow we ended up with an infinte reloading loop
+    if (!LOCALSTORAGE_VALUES.refreshToken || LOCALSTORAGE_VALUES.refreshToken === 'undefined' || (Date.now() - Number(LOCALSTORAGE_VALUES.timestamp) / 1000) < 1000) {
+      console.error('no refresh token available');
+      logout();
+    }
+
+    //use /refresh_token endpoint from Node app: 
+    const { data } = await axios.get(`/refresh_token?refresh_token=${LOCALSTORAGE_VALUES.refreshToken}`)
+
+    //update localstorage values: 
+    window.localStorage.setItem(LOCALSTORAGE_KEYS.accessToken, data.access_token);
+    window.localStorage.setItem(LOCALSTORAGE_KEYS.timestamp, Date.now());
+
+    //Reload the page so localstorage update will be reflected 
+    window.location.reload();
+  } catch (event) {
+    console.error(event);
+  }
+};
 
 /**
  * Handles logic for retrieving the Spotify access token from localStorage
