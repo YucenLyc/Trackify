@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { accessToken, logout, getCurrentUserProfile } from './spotify';
 import { catchErrors } from './utils';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import './App.css';
 
 function App() {
@@ -25,20 +26,45 @@ function App() {
             Log in to Spotify
           </a>
         ) : (
-          <>
-            <h1>Logged In!</h1>
-            <button onClick={logout}>Log Out</button>
-
-            {profile && (
-              <div>
-                <h1>{profile.display_name}</h1>
-                <p>{profile.followers.total} Follower(s)</p>
-                {profile.images.length && profile.images[0].url && (
-                  <img src={profile.images[0].url} alt="Avatar" />
+          <Router>
+            <Switch>
+              <Route path="/top-artists">
+                  <h2>Top Artists</h2>
+              </Route>
+              <Route path="/top-tracks">
+                  <h2>Top Tracks</h2>
+              </Route>
+              <Route path="/playlists/:id">
+                  <h2>Playlist</h2>
+              </Route>
+              <Route path="/playlists">
+                  <h2>Playlists</h2>
+              </Route>
+              <Route path="/">
+                <button onClick={logout}>Log Out</button>
+                {profile && (
+                  <div>
+                    <h1>{profile.display_name}</h1>
+                    <p>{profile.followers.total} Follwer(s)</p>
+                  </div>
                 )}
-              </div>
-            )}
-          </>
+              </Route>
+            </Switch>
+          </Router>
+          // <>
+          //   <h1>Logged In!</h1>
+          //   <button onClick={logout}>Log Out</button>
+
+          //   {profile && (
+          //     <div>
+          //       <h1>{profile.display_name}</h1>
+          //       <p>{profile.followers.total} Follower(s)</p>
+          //       {profile.images.length && profile.images[0].url && (
+          //         <img src={profile.images[0].url} alt="Avatar" />
+          //       )}
+          //     </div>
+          //   )}
+          // </>
         )}
       </header>
     </div >
