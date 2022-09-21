@@ -46,25 +46,14 @@ function App() {
                   <div>
                     <h1>{profile.display_name}</h1>
                     <p>{profile.followers.total} Follwer(s)</p>
+                    {profile.images.length && profile.images[0].url && (
+                      <img src={profile.images[0].url} alt="Avatar"/>
+                    )}
                   </div>
                 )}
               </Route>
             </Switch>
           </Router>
-          // <>
-          //   <h1>Logged In!</h1>
-          //   <button onClick={logout}>Log Out</button>
-
-          //   {profile && (
-          //     <div>
-          //       <h1>{profile.display_name}</h1>
-          //       <p>{profile.followers.total} Follower(s)</p>
-          //       {profile.images.length && profile.images[0].url && (
-          //         <img src={profile.images[0].url} alt="Avatar" />
-          //       )}
-          //     </div>
-          //   )}
-          // </>
         )}
       </header>
     </div >
