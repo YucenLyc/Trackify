@@ -32,7 +32,7 @@ function App() {
             {profile && (
               <div>
                 <h1>{profile.display_name}</h1>
-                <p>{profile.followers.total}</p>
+                <p>{profile.followers.total} Follower(s)</p>
                 {profile.images.length && profile.images[0].url && (
                   <img src={profile.images[0].url} alt="Avatar" />
                 )}
