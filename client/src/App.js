@@ -21,8 +21,8 @@ function App() {
     setToken(accessToken);
 
     const fetchData = async () => {
-        const { data } = await getCurrentUserProfile(accessToken);
-        setProfile(data);
+      const { data } = await getCurrentUserProfile(accessToken);
+      setProfile(data);
     }
     catchErrors(fetchData());
   }, []);
@@ -36,18 +36,19 @@ function App() {
           </a>
         ) : (
           <Router>
+            <ScrollToTop />
             <Switch>
               <Route path="/top-artists">
-                  <h2>Top Artists</h2>
+                <h2>Top Artists</h2>
               </Route>
               <Route path="/top-tracks">
-                  <h2>Top Tracks</h2>
+                <h2>Top Tracks</h2>
               </Route>
               <Route path="/playlists/:id">
-                  <h2>Playlist</h2>
+                <h2>Playlist</h2>
               </Route>
               <Route path="/playlists">
-                  <h2>Playlists</h2>
+                <h2>Playlists</h2>
               </Route>
               <Route path="/">
                 <button onClick={logout}>Log Out</button>
@@ -56,7 +57,7 @@ function App() {
                     <h1>{profile.display_name}</h1>
                     <p>{profile.followers.total} Follwer(s)</p>
                     {profile.images.length && profile.images[0].url && (
-                      <img src={profile.images[0].url} alt="Avatar"/>
+                      <img src={profile.images[0].url} alt="Avatar" />
                     )}
                   </div>
                 )}
