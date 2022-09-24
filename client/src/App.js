@@ -2,33 +2,33 @@ import { useState, useEffect } from 'react';
 import { accessToken, logout, getCurrentUserProfile } from './spotify';
 import { catchErrors } from './utils';
 import { BrowserRouter as Router, Switch, Route, useLocation } from 'react-router-dom';
-import styled, { createGlobalStyle } from 'styled-components/macro';
+import styled from 'styled-components/macro';
+import { GlobalStyle } from './styles';
 
-const GlobalStyle = createGlobalStyle`
-  :root{
-    --black:#121212;
-    --green:#1DB954;
-    --white:#ffffff;
+//   :root{
+//     --black:#121212;
+//     --green:#1DB954;
+//     --white:#ffffff;
 
-    --font: 'Circular Std', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-  }
-  html {
-    box-sizing: border-box;
-  }
+//     --font: 'Circular Std', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+//   }
+//   html {
+//     box-sizing: border-box;
+//   }
 
-  *,
-  *:before,
-  *:after {
-    box-sizing: inherit;
-  }
+//   *,
+//   *:before,
+//   *:after {
+//     box-sizing: inherit;
+//   }
 
-  body {
-    margin: 0;
-    padding: 0;
-    background-color: black;
-    color: white;
-  }
-`;
+//   body {
+//     margin: 0;
+//     padding: 0;
+//     background-color: black;
+//     color: white;
+//   }
+// `;
 
 const StyledLoginButton = styled.a`
   background-color: var(--green);
