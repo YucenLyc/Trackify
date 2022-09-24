@@ -2,7 +2,26 @@ import { useState, useEffect } from 'react';
 import { accessToken, logout, getCurrentUserProfile } from './spotify';
 import { catchErrors } from './utils';
 import { BrowserRouter as Router, Switch, Route, useLocation } from 'react-router-dom';
-import styled from 'styled-components/macro';
+import styled, { createGlobalStyle } from 'styled-components/macro';
+
+const GlobalStyle = createGlobalStyle`
+  html {
+    box-sizing: border-box;
+  }
+
+  *,
+  *:before,
+  *:after {
+    box-sizing: inherit;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    background-color: black;
+    color: white;
+  }
+`;
 
 const StyledLoginButton = styled.a`
   background-color: #1DB954;
@@ -38,6 +57,7 @@ function App() {
 
   return (
     <div className="App">
+      <GlobalStyle/>
       <header className="App-header">
         {!token ? (
           <StyledLoginButton className="App-link" href="http://localhost:9999/login">
