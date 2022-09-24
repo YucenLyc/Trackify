@@ -5,6 +5,13 @@ import { BrowserRouter as Router, Switch, Route, useLocation } from 'react-route
 import styled, { createGlobalStyle } from 'styled-components/macro';
 
 const GlobalStyle = createGlobalStyle`
+  :root{
+    --black:#121212;
+    --green:#1DB954;
+    --white:#ffffff;
+
+    --font: 'Circular Std', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  }
   html {
     box-sizing: border-box;
   }
@@ -24,13 +31,13 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 const StyledLoginButton = styled.a`
-  background-color: #1DB954;
-  color: white;
+  background-color: var(--green);
+  color: var(--white);
   padding: 10px 20px;
-  margin: 20px auto;
+  margin: 20px;
   border-radius: 30px;
   display: inline-block;
-`
+`;
 
 function ScrollToTop() {
   const { pathName } = useLocation();
