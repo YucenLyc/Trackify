@@ -1,6 +1,6 @@
 import styled from './styled-components/macro';
 
-const StyleContainer = styled.main`
+const StyleLoginContainer = styled.main`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -23,3 +23,13 @@ const StyledLoginButton = styled.a`
     filter: brightness(1.1);
   }
 `;
+
+const Login = () => {
+  <StyleLoginContainer>
+    <StyledLoginButton href="http://localhost:9999/login">
+      Log In Spotify
+    </StyledLoginButton>
+  </StyleLoginContainer>
+};
+
+export default Login;
