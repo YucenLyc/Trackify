@@ -1,18 +1,18 @@
-import styled from './styled-components/macro';
+import styled from 'styled-components/macro';
 
-const StyleLoginContainer = styled.main`
+const StyledLoginContainer = styled.main`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100vh;
-`
+`;
 
 const StyledLoginButton = styled.a`
   display: inline-block;
   background-color: var(--green);
   color: var(--white);
-  border-radius: var(--board-radius-pill);
+  border-radius: var(--border-radius-pill);
   font-weight: 700;
   font-size: var(--fz-lg);
   padding: var(--spacing-sm) var(--spacing-xl);
@@ -24,12 +24,12 @@ const StyledLoginButton = styled.a`
   }
 `;
 
-const Login = () => {
-  <StyleLoginContainer>
+const Login = () => (
+  <StyledLoginContainer>
     <StyledLoginButton href="http://localhost:9999/login">
-      Log In Spotify
+      Log in to Spotify
     </StyledLoginButton>
-  </StyleLoginContainer>
-};
+  </StyledLoginContainer>
+);
 
 export default Login;
