@@ -4,31 +4,7 @@ import { catchErrors } from './utils';
 import { BrowserRouter as Router, Switch, Route, useLocation } from 'react-router-dom';
 import styled from 'styled-components/macro';
 import { GlobalStyle } from './styles';
-
-//   :root{
-//     --black:#121212;
-//     --green:#1DB954;
-//     --white:#ffffff;
-
-//     --font: 'Circular Std', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-//   }
-//   html {
-//     box-sizing: border-box;
-//   }
-
-//   *,
-//   *:before,
-//   *:after {
-//     box-sizing: inherit;
-//   }
-
-//   body {
-//     margin: 0;
-//     padding: 0;
-//     background-color: black;
-//     color: white;
-//   }
-// `;
+import { Login } from './pages';
 
 const StyledLoginButton = styled.a`
   background-color: var(--green);
@@ -67,8 +43,7 @@ function App() {
       <GlobalStyle/>
       <header className="App-header">
         {!token ? (
-          <StyledLoginButton className="App-link" href="http://localhost:9999/login">
-            Log in to Spotify</StyledLoginButton>
+          <Login />
         ) : (
           <Router>
             <ScrollToTop />
