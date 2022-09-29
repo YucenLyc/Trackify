@@ -4,7 +4,7 @@ import { catchErrors } from './utils';
 import { BrowserRouter as Router, Switch, Route, useLocation } from 'react-router-dom';
 import styled from 'styled-components/macro';
 import { GlobalStyle } from './styles';
-import { Login } from './pages';
+import { Login, Profile } from './pages';
 
 const StyledLoginButton = styled.a`
   background-color: var(--green);
@@ -62,7 +62,8 @@ function App() {
               </Route>
               <Route path="/">
                 <button onClick={logout}>Log Out</button>
-                {profile && (
+                {profile && < Profile />}
+                {/* {profile && (
                   <div>
                     <h1>{profile.display_name}</h1>
                     <p>{profile.followers.total} Follwer(s)</p>
@@ -70,7 +71,7 @@ function App() {
                       <img src={profile.images[0].url} alt="Avatar" />
                     )}
                   </div>
-                )}
+                )} */}
               </Route>
             </Switch>
           </Router>
