@@ -22,15 +22,6 @@ const StyledLogoutButton = styled.button`
   }
 `;
 
-const StyledLoginButton = styled.a`
-  background-color: var(--green);
-  color: var(--white);
-  padding: 10px 20px;
-  margin: 20px;
-  border-radius: 30px;
-  display: inline-block;
-`;
-
 function ScrollToTop() {
   const { pathName } = useLocation();
 
