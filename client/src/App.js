@@ -1,10 +1,14 @@
 import { useState, useEffect } from 'react';
-import { accessToken, logout, getCurrentUserProfile } from './spotify';
-import { catchErrors } from './utils';
-import { BrowserRouter as Router, Switch, Route, useLocation } from 'react-router-dom';
-import styled from 'styled-components/macro';
-import { GlobalStyle } from './styles';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  useLocation,
+} from 'react-router-dom';
+import { accessToken, logout } from './spotify';
 import { Login, Profile } from './pages';
+import { GlobalStyle } from './styles';
+import styled from 'styled-components/macro';
 
 const StyledLogoutButton = styled.button`
   position: absolute;
@@ -22,62 +26,59 @@ const StyledLogoutButton = styled.button`
   }
 `;
 
+// Scroll to top of page when changing routes
+// https://reactrouter.com/web/guides/scroll-restoration/scroll-to-top
 function ScrollToTop() {
-  const { pathName } = useLocation();
+  const { pathname } = useLocation();
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, [pathName]);
+  }, [pathname]);
+
   return null;
 }
 
 function App() {
   const [token, setToken] = useState(null);
-  const [profile, setProfile] = useState(null);
 
   useEffect(() => {
     setToken(accessToken);
-
-    const fetchData = async () => {
-      const { data } = await getCurrentUserProfile(accessToken);
-      setProfile(data);
-    }
-    catchErrors(fetchData());
   }, []);
 
   return (
-    <div className="App">
+    <div className="app">
       <GlobalStyle />
-      <header className="App-header">
-        {!token ? (
-          <Login />
-        ) : (
-          <>
+
+      {!token ? (
+        <Login />
+      ) : (
+        <>
           <StyledLogoutButton onClick={logout}>Log Out</StyledLogoutButton>
+
           <Router>
             <ScrollToTop />
+
             <Switch>
               <Route path="/top-artists">
-                <h2>Top Artists</h2>
+                <h1>Top Artists</h1>
               </Route>
               <Route path="/top-tracks">
-                <h2>Top Tracks</h2>
+                <h1>Top Tracks</h1>
               </Route>
               <Route path="/playlists/:id">
-                <h2>Playlist</h2>
+                <h1>Playlist</h1>
               </Route>
               <Route path="/playlists">
-                <h2>Playlists</h2>
+                <h1>Playlists</h1>
               </Route>
               <Route path="/">
                 <Profile />
               </Route>
             </Switch>
           </Router>
-          </>
-        )}
-      </header>
-    </div >
+        </>
+      )}
+    </div>
   );
 }
 
