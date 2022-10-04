@@ -1,15 +1,21 @@
 import { useState, useEffect } from 'react';
 import { catchErrors } from '../utils';
-import { getCurrentUserProfile } from '../spotify';
+import { getCurrentUserProfile, getCurrentUserPlaylists } from '../spotify';
 import { StyledHeader } from '../styles';
 
 const Profile = () => {
   const [profile, setProfile] = useState(null);
+  const [playlist, setPlaylist] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
-      const { data } = await getCurrentUserProfile();
-      setProfile(data);
+      const UserProfile = await getCurrentUserProfile();
+      setProfile(UserProfile.data);
+
+      const userPlaylists = await getCurrentUserPlaylists();
+      setPlaylist(userPlaylists.data);
+
+      console.log("hello playlist", userPlaylists.data)
     }
 
     catchErrors(fetchData());
