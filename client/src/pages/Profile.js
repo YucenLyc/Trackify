@@ -34,7 +34,10 @@ const Profile = () => {
               <div className="header__overline">Profile
                 <h1 className="header__name">{profile.display_name}</h1>
                 <p className="header__meta">
-                  <span>{profile.followers.total} Follower {profile.followers.total !== 1 ? 's' : ''}
+                  {playlist && (
+                    <span>{playlist.total} Playlist{playlist.total !== 1 ? 's' : ''}</span>
+                  )}
+                  <span>{profile.followers.total} Follower{profile.followers.total !== 1 ? 's' : ''}
                   </span>
                 </p>
               </div>
