@@ -38,6 +38,7 @@ const StyledHeader = styled.header`
       padding: var(--spacing-xl) var(--spacing-xxl);
     }
   }
+
   img.header__img {
     width: 20%;
     max-width: 250px;
@@ -45,7 +46,7 @@ const StyledHeader = styled.header`
     margin-right: var(--spacing-lg);
     box-shadow: 0 4px 60px rgb(0 0 0 / 50%);
     background-color: var(--dark-grey);
-    border-radius: ${props => props.type === 'user' ? '20%' : '0'};
+    border-radius: ${props => props.type === 'user' ? '50%' : '0'};
 
     @media (min-width: 768px) {
       margin-right: var(--spacing-xl);
