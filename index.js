@@ -35,7 +35,7 @@ app.get('/login', (req, res) => {
   res.cookie(stateKey, state);
 
   //these 2 scopes will allow access to the logged in account:
-  const scope = 'user-read-private user-read-email';
+  const scope = ['user-read-private', 'user-read-email', 'user-top-read'];
 
   const queryParams = querystring.stringify({
     client_id: CLIENT_ID,
@@ -64,25 +64,25 @@ app.get('/callback', (req, res) => {
       Authorization: `Basic ${new Buffer.from(`${CLIENT_ID}:${CLIENT_SECRET}`).toString('base64')}`,
     },
   })
-  .then(response => {
-    if (response.status === 200) {
-      const { access_token, refresh_token, expires_in } = response.data;
+    .then(response => {
+      if (response.status === 200) {
+        const { access_token, refresh_token, expires_in } = response.data;
 
-      const queryParams = querystring.stringify({
-        access_token,
-        refresh_token,
-        expires_in,
-      });
+        const queryParams = querystring.stringify({
+          access_token,
+          refresh_token,
+          expires_in,
+        });
 
-      res.redirect(`http://localhost:3000/?${queryParams}`);
+        res.redirect(`http://localhost:3000/?${queryParams}`);
 
-    } else {
-      res.redirect(`/?${querystring.stringify({ error: 'invalid_token' })}`);
-    }
-  })
-  .catch(error => {
-    res.send(error);
-  })
+      } else {
+        res.redirect(`/?${querystring.stringify({ error: 'invalid_token' })}`);
+      }
+    })
+    .catch(error => {
+      res.send(error);
+    })
 });
 
 app.get('/refresh_token', (req, res) => {
