@@ -34,8 +34,8 @@ app.get('/login', (req, res) => {
   //set a cookie: 
   res.cookie(stateKey, state);
 
-  //these 2 scopes will allow access to the logged in account:
-  const scope = ['user-read-private', 'user-read-email', 'user-top-read'];
+  //these scopes will allow access to the logged in account:
+  const scope = ['user-read-private', 'user-read-email', 'user-top-read'].join(' ');
 
   const queryParams = querystring.stringify({
     client_id: CLIENT_ID,
