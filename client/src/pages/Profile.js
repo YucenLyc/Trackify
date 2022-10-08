@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
 import { catchErrors } from '../utils';
-import { getCurrentUserProfile, getCurrentUserPlaylists } from '../spotify';
+import { getCurrentUserProfile, getCurrentUserPlaylists, getTopArtists } from '../spotify';
 import { StyledHeader } from '../styles';
 
 const Profile = () => {
   const [profile, setProfile] = useState(null);
-  const [playlist, setPlaylist] = useState(null);
+  const [playlists, setPlaylists] = useState(null);
+  const [topArtists, setTopArtists] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -13,13 +14,18 @@ const Profile = () => {
       setProfile(UserProfile.data);
 
       const userPlaylists = await getCurrentUserPlaylists();
-      setPlaylist(userPlaylists.data);
+      setPlaylists(userPlaylists.data);
 
-      console.log("hello playlist", userPlaylists.data)
+      const userTopArtists = await getTopArtists();
+      setTopArtists(userTopArtists.data);
+
+      console.log("hello artists", userTopArtists.data)
     }
 
     catchErrors(fetchData());
   }, []);
+
+  console.log("this is what you're looking for", topArtists);
 
   return (
     <>
@@ -34,8 +40,8 @@ const Profile = () => {
               <div className="header__overline">Profile
                 <h1 className="header__name">{profile.display_name}</h1>
                 <p className="header__meta">
-                  {playlist && (
-                    <span>{playlist.total} Playlist{playlist.total !== 1 ? 's' : ''}</span>
+                  {playlists && (
+                    <span>{playlists.total} Playlist{playlists.total !== 1 ? 's' : ''}</span>
                   )}
                   <span>{profile.followers.total} Follower{profile.followers.total !== 1 ? 's' : ''}
                   </span>
