@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { catchErrors } from '../utils';
 import { getCurrentUserProfile, getCurrentUserPlaylists, getTopArtists } from '../spotify';
 import { StyledHeader } from '../styles';
+import { SectionWrapper, ArtistsGrid } from '../components'
 
 const Profile = () => {
   const [profile, setProfile] = useState(null);
@@ -36,7 +37,6 @@ const Profile = () => {
               {profile.images.length && profile.images[0].url && (
                 <img className="header__img" src={profile.images[0].url} alt="Avatar" />
               )}
-
               <div className="header__overline">Profile
                 <h1 className="header__name">{profile.display_name}</h1>
                 <p className="header__meta">
@@ -49,6 +49,13 @@ const Profile = () => {
               </div>
             </div>
           </StyledHeader>
+          {topArtists && (
+            <main>
+              <SectionWrapper title="Top artists this month" seeAllLink="/top-artists">
+                <ArtistsGrid artists={topArtists.items.slice(0, 20)} />
+              </SectionWrapper>
+            </main>
+          )}
         </>
       )}
     </>
