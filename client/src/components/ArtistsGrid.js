@@ -1,4 +1,4 @@
-import StyledGrid from "../styles";
+import { StyledGrid } from "../styles";
 
 const ArtistsGrid = ({ artists }) => (
   <>
