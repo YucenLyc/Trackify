@@ -32,7 +32,7 @@ const hasTokenExpired = () => {
  * Clear out all localStorage items we've set and reload the page
  * @returns {void}
  */
- export const logout = () => {
+export const logout = () => {
   // Clear all localStorage items
   for (const property in LOCALSTORAGE_KEYS) {
     window.localStorage.removeItem(LOCALSTORAGE_KEYS[property]);
@@ -113,6 +113,10 @@ export const getCurrentUserPlaylists = (limit = 20) => {
   return axios.get(`/me/playlists?/limit=${limit}`);
 };
 
- export const getTopArtists = (time_range = 'medium_term') => {
+export const getTopArtists = (time_range = 'medium_term') => {
   return axios.get(`/me/top/artists?time_range=${time_range}`);
 };
+
+export const getTopTracks = (time_range = 'short_term') => {
+  return axios.get(`/me/top/tracks?time_range=${time_range}`);
+}
