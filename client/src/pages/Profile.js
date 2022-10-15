@@ -30,7 +30,7 @@ const Profile = () => {
     catchErrors(fetchData());
   }, []);
 
-  console.log("this is what you're looking for", topArtists);
+  //console.log("this is what you're looking for", topArtists);
 
   return (
     <>
