@@ -1,19 +1,21 @@
-import { formateDuration } from '../utils';
+import { formatDuration } from '../utils';
 import { StyledTrackList } from '../styles';
 
 const TrackList = ({ tracks }) => (
   <>
     {tracks && tracks.length ? (
-      <StyledTrackList type="tracks">
+      <StyledTrackList>
         {tracks.map((track, i) => (
           <li className="track__item" key={i}>
-            <div className="track__item__num">{track.images[0] && (
-              <div className="track__item__img">
-                <img src={track.album.image[2].url} alt={track.name} />
-              </div>
-            )}
+            <div className="track__item__num">{i + 1}</div>
+            <div className="track__item__title-group">
+              {track.album.images.length && track.album.images[2] && (
+                <div className="track__item__img">
+                  <img src={track.album.images[2].url} alt={track.name} />
+                </div>
+              )}
               <div className="track__item__name-artist">
-                <div className="track__item__name overflow--ellipsis">
+                <div className="track__item__name overflow-ellipsis">
                   {track.name}
                 </div>
                 <div className="track__item__artist overflow-ellipsis">
@@ -34,6 +36,10 @@ const TrackList = ({ tracks }) => (
           </li>
         ))}
       </StyledTrackList>
+    ) : (
+      <p className="empty-notice">No tracks available</p>
     )}
   </>
-)
+);
+
+export default TrackList;
