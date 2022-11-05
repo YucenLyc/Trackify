@@ -45,7 +45,7 @@ const Profile = () => {
           <StyledHeader type="user">
             <div className="header__inner">
               {profile.images.length && profile.images[0].url && (
-                <img className="header__img" src={profile.images[0].url} alt="Avatar"/>
+                <img className="header__img" src={profile.images[0].url} alt="Avatar" />
               )}
               <div>
                 <div className="header__overline">Profile</div>
