@@ -6,7 +6,7 @@ import {
   useLocation,
 } from 'react-router-dom';
 import { accessToken, logout } from './spotify';
-import { Login, Profile } from './pages';
+import { Login, Profile, TopArtists } from './pages';
 import { GlobalStyle } from './styles';
 import styled from 'styled-components/macro';
 
@@ -60,7 +60,7 @@ function App() {
 
             <Switch>
               <Route path="/top-artists">
-                <h1>Top Artists</h1>
+                <TopArtists />
               </Route>
               <Route path="/top-tracks">
                 <h1>Top Tracks</h1>
