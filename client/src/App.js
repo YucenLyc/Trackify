@@ -59,6 +59,9 @@ function App() {
             <ScrollToTop />
 
             <Switch>
+              <Route path="/profile">
+                <Profile />
+              </Route>
               <Route path="/top-artists">
                 <TopArtists />
               </Route>
