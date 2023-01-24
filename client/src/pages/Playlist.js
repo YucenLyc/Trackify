@@ -1,6 +1,11 @@
+import { TrackList, SectionWrapper, Loader } from '../components';
+
 const Playlist = () => {
   return (
-    <h1>Playlist page</h1>
+    <main>
+      <h1>Playlist page</h1>
+    </main>
+
   )
 }
 
