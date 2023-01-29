@@ -4,10 +4,17 @@ const express = require('express');
 const app = express();
 const querystring = require('query-string');
 const axios = require('axios');
+const path = require('path');
 
 const CLIENT_ID = process.env.CLIENT_ID;
 const CLIENT_SECRET = process.env.CLIENT_SECRET;
 const REDIRECT_URI = process.env.REDIRECT_URI;
+const FRONTEND_URI = process.env.FRONTEND_URI;
+const PORT = process.env.PORT || 9999;
+
+// Priority serve any static files
+app.use(express.static(path.resolve(__dirname, './client/build')));
+
 
 app.get('/', (req, res) => {
   res.send('Hello It\'s Buzzie\'s World!');
@@ -74,7 +81,7 @@ app.get('/callback', (req, res) => {
           expires_in,
         });
 
-        res.redirect(`http://localhost:3000/?${queryParams}`);
+        res.redirect(`http://{FRONTEND_URI}:3000/?${queryParams}`);
 
       } else {
         res.redirect(`/?${querystring.stringify({ error: 'invalid_token' })}`);
@@ -108,7 +115,12 @@ app.get('/refresh_token', (req, res) => {
     });
 });
 
-const port = 9999;
-app.listen(port, () => {
-  console.log(`Express app listening at http://localhost:${port}`);
+// "catch all" routing safty net: 
+// all remaining requests return the React App, so it can handle routing:
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, './client/build', 'index.html'));
+});
+
+app.listen(PORT, () => {
+  console.log(`Express app listening at http://localhost:${PORT}`);
 });
