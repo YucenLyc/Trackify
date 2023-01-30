@@ -12,13 +12,13 @@ const REDIRECT_URI = process.env.REDIRECT_URI;
 const FRONTEND_URI = process.env.FRONTEND_URI;
 const PORT = process.env.PORT || 9999;
 
-// Priority serve any static files
+// Priority serve any static files.
 app.use(express.static(path.resolve(__dirname, './client/build')));
 
 
-app.get('/', (req, res) => {
-  res.send('Hello It\'s Buzzie\'s World!');
-});
+// app.get('/', (req, res) => {
+//   res.send('Hello It\'s Buzzie\'s World!');
+// });
 
 /**
  * Generates a random string containing numbers and letters

@@ -6,7 +6,7 @@
   "engines": {
     "node": "14.15.0"
   },
-  "cacheDirectory": [
+  "cacheDirectories": [
     "node_modules",
     "client/node_modules"
   ],
