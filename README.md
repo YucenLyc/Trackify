@@ -1,2 +1,2 @@
 # Releasify
-An app that notify users for any release updates from musicians they follow
+An application that visualize personal data for Spotify users.
