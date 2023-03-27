@@ -1,5 +1,5 @@
 {
-  "name": "newreleasify",
+  "name": "trackify",
   "version": "1.0.0",
   "description": "An app that notify users for any release updates from musicians they follow",
   "main": "index.js",
@@ -20,15 +20,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/YucenLyc/newReleasify.git"
+    "url": "git+https://github.com/YucenLyc/trackify.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/YucenLyc/newReleasify/issues"
+    "url": "https://github.com/YucenLyc/trackify/issues"
   },
-  "homepage": "https://github.com/YucenLyc/newReleasify#readme",
+  "homepage": "https://github.com/YucenLyc/trackify#readme",
   "dependencies": {
     "axios": "^0.27.2",
     "dotenv": "^16.0.2",
