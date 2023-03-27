@@ -26,7 +26,7 @@ const StyledLoginButton = styled.a`
 
 const LOGIN_URI =
   process.env.NODE_ENV !== 'production'
-    ? 'http://localhost:8888/login'
+    ? 'http://localhost:3000/login'
     : 'https://releasify-app.herokuapp.com/login';
 
 const Login = () => (
